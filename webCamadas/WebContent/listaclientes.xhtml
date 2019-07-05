@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<ui:composition template="index.xhtml">
+		<ui:define name="menu">
+			<h:commandLink value="Inicio" action="index.xhtml" />
+		</ui:define>
+		<ui:define name="conteudo">
+			<h1>Lista de clientes</h1>
+			<h:form id="buscaId">
+				<h:outputLabel value="Nome do Cliente " for="nomeCliente" />
+				<h:inputText class="nomeCliente" id="nomeCliente"
+					value="#{clienteListagemBean.nome}" size="20" />
+				<h:commandButton partialSubmit="true" value="Buscar"
+					action="#{clienteListagemBean.listarClientes}">
+					<f:ajax execute="@form" render="@all" />
+				</h:commandButton>
+			</h:form>
+			<br />
+			<br />
+			<br />
+
+			<h:dataTable value="#{clienteListagemBean.clientes}" id="dadosCliente" var="cliente"
+				rendered="#{clienteListagemBean.pesquisado == true}">
+
+
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{cliente.id}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{cliente.nome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+					<h:outputText value="#{cliente.cpf}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{cliente.email}" />
+				</h:column>
+
+
+
+
+			</h:dataTable>
+
+
+			<h:outputText rendered="#{clienteListagemBean.falha == true}"
+				value="Nenhum cliente para listar" id="falha">
+			</h:outputText>
+
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

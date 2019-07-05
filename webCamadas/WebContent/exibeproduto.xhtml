@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<ui:composition template="index.xhtml">
+		<ui:define name="menu">
+			<h:commandLink value="Inicio" action="index.xhtml" />
+		</ui:define>
+		<ui:define name="conteudo">
+			<h1>Buscar cliente</h1>
+			<h:form id="buscaId">
+				<h:outputLabel value="ID do Cliente " for="idCliente" />
+				<h:inputText class="idCliente" id="idCliente"
+					value="#{produtoDetalheBean.id}" size="5" />
+				<h:commandButton partialSubmit="true" value="Buscar"
+					action="#{produtoDetalheBean.buscarProdutoPorId()}">
+					<f:ajax execute="@form" render="@all" />
+				</h:commandButton>
+			</h:form>
+			<br />
+			<br />
+			<br />
+
+			<h:form id="dadosCliente"
+				rendered="#{produtoDetalheBean.pesquisado == true}">
+
+
+
+				<h:outputLabel value="ID:" for="idUsuario" />
+				<br />
+				<h:outputText id="idProduto"
+					value="#{produtoDetalheBean.produto.id}" size="2" />
+				<br />
+				<br />
+
+				<h:outputLabel value="Nome:" for="nome" />
+				<br />
+				<h:outputText id="nome" value="#{produtoDetalheBean.produto.nome}"
+					size="100" />
+				<br />
+				<br />
+
+				<h:outputLabel value="Endereço completo:" for="nome" />
+				<br />
+				<h:outputText id="endereco"
+					value="#{produtoDetalheBean.produto.descricao}" size="100" />
+				<br />
+				<br />
+
+				<h:outputLabel value="CPF:" for="cpf" />
+				<br />
+				<h:outputText id="cpf" value="#{produtoDetalheBean.produto.preco}"
+					size="50" />
+				<br />
+				<br />
+
+				<br />
+				<br />
+				<br></br>
+				<h:commandButton
+					onclick="#{clienteDetalheBean.excluirClientePorId()}"
+					value="Excluir cliente"
+					rendered="#{clienteDetalheBean.pesquisado == true}">
+					<f:ajax execute="@all" render="@all" />
+				</h:commandButton>
+			</h:form>
+
+			<h:outputText rendered="#{clienteDetalheBean.excluido == true}">
+				value="Cliente excluido com sucesso!" id="excluido">
+			</h:outputText>
+
+			<h:outputText rendered="#{clienteDetalheBean.falha == true}"
+				value="ID não encontrado" id="falha">
+			</h:outputText>
+
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

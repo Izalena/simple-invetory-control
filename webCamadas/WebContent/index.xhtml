@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>AV3WebEmCamadas</title>
+</h:head>
+<h:body>
+
+
+	<p:layout style="background-color:black" fullPage="true">
+
+
+		<p:layoutUnit position="south" size="50">
+			<h:outputText value="Desenvolvido por Gabriel Broitman" />
+		</p:layoutUnit>
+
+
+
+
+		<p:layoutUnit position="center">
+			<center>
+				<h:form columns="1">
+					<p:menubar style="background-color:green">
+						<p:menuitem value="Busca Cliente" action="exibecliente.xhtml" />
+						<p:menuitem value="Lista de clientes" action="listaclientes.xhtml"
+							ajax="true" />
+
+						<p:menuitem value="Catálogo de produtos"
+							action="listaprodutos.xhtml" />
+						<p:submenu label="Carrinho">
+						</p:submenu>
+					</p:menubar>
+				</h:form>
+				<p:graphicImage value="logo.png" /><br></br>
+				<h:outputText width="100%" value="Weedem CO." />
+				<ui:insert name="conteudo"></ui:insert>
+			</center>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

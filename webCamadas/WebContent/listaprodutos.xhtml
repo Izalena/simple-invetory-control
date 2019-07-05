@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<ui:composition template="index.xhtml">
+		<ui:define name="menu">
+			<h:commandLink value="Inicio" action="index.xhtml" />
+		</ui:define>
+		<ui:define name="conteudo">
+			<h1>Catálogo de produtos</h1>
+			<h:form id="buscaId">
+				<p:panel header="Filtros">
+					<h:outputLabel value="Nome do Produto " for="nomeProduto" />
+					<h:inputText class="nomeProduto" id="nomeProduto"
+						value="#{produtoListagemBean.nome}" size="20" />
+					<h:outputText value="Categoria do Produto " for="categoriaProduto" />
+					<p:selectOneMenu value="#{produtoListagemBean.categoria}" size="20">
+						<f:selectItems value="#{produtoListagemBean.categorias}" />
+					</p:selectOneMenu>
+					<h:commandButton partialSubmit="true" value="Buscar"
+						onclick="#{produtoListagemBean.listarProdutos()}">
+						<f:ajax execute="@form" render="@all" />
+					</h:commandButton>
+				</p:panel>
+				<p:panel>
+
+					<p:dataTable value="#{produtoListagemBean.produtos}" var="produto"
+						rows="10" paginator="true" lazy="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:column>
+							<!-- column header -->
+							<f:facet name="header">Código</f:facet>
+							<!-- row record -->
+    				#{produto.id}
+    			</p:column>
+
+
+						<p:column>
+							<f:facet name="header">Nome do Produto</f:facet>
+    				#{produto.nome}
+    			</p:column>
+
+						<p:column>
+							<f:facet name="header">Preco</f:facet>
+    				#{produto.preco}
+    			</p:column>
+
+					</p:dataTable>
+				</p:panel>
+
+			</h:form>
+			<br />
+			<br />
+			<br />
+
+
+
+
+			<h:outputText rendered="#{produtoListagemBean.produtos.size() == 0}"
+				value="Nenhum produto para listar" id="falha">
+			</h:outputText>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

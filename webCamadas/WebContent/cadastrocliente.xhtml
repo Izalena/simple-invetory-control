@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<ui:composition template="index.xhtml">
+		<ui:define name="menu">
+			<h:commandLink value="Inicio" action="index.xhtml" />
+		</ui:define>
+		<ui:define name="conteudo">
+			<h1>Cadastro de cliente</h1>
+			<h:form rendered="#{clienteCadastroBean.sucesso == false}"
+				id="dadosUsuario">
+
+				<h:outputLabel value="Nome: " for="nome" />
+				<br/>
+				<h:inputText id="nome" value="#{clienteCadastroBean.cliente.nome}"
+					size="100" />
+				<br />
+				<br />
+				<h:outputLabel value="Endereço completo" for="nome" />
+				<br/>
+				<h:inputText id="endereco"
+					value="#{clienteCadastroBean.cliente.endereco}" size="100" />
+				<br />
+				<br />
+				<h:outputLabel value="CPF: " for="cpf" />
+				<br/>
+				<h:inputText id="cpf" value="#{clienteCadastroBean.cliente.cpf}"
+					size="50" />
+				<br />
+				<br />
+				<h:outputLabel value="E-Mail:" for="email" />
+				<br/>
+				<h:inputText id="email" value="#{clienteCadastroBean.cliente.email}"
+					size="50" />
+
+				<br />
+				<br />
+				<h:commandButton value="Gravar"
+					action="#{clienteCadastroBean.gravar}">
+					<f:ajax execute="@form" render="@all" />
+				</h:commandButton>
+			</h:form>
+			<h:outputText value="Cadastro feito com sucesso!" rendered="#{clienteCadastroBean.sucesso == true}"
+				id="sucesso"/>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
